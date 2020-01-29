@@ -31,10 +31,67 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.metrics import accuracy_score
 
+### KNN 
 
+from sklearn.neighbors import KNeighborsClassifier
 
+# Create a KNN Classifier.
+clf = KNeighborsClassifier(n_neighbors=7, weights='distance')
 
+# Train the classifier.
+clf.fit(features_train, labels_train)
+
+# Make predictions.
+pred = clf.predict(features_test)
+
+# Compute accuracy of the predictions.
+accuracy = accuracy_score(pred, labels_test)
+
+print 'KNN Accuracy: ', accuracy
+
+################################################################################
+
+### AdaBoost
+
+from sklearn.ensemble import AdaBoostClassifier
+
+# Create an AdaBoost Classifier.
+clf = AdaBoostClassifier()
+
+# Train the classifier.
+clf.fit(features_train, labels_train)
+
+# Make predictions.
+pred = clf.predict(features_test)
+
+# Compute accuracy of the predictions.
+accuracy = accuracy_score(pred, labels_test)
+
+print 'AdaBoost Accuracy: ', accuracy
+
+################################################################################
+
+### Random Forest
+
+from sklearn.ensemble import RandomForestClassifier
+
+# Create an Random Forest Classifier.
+clf = RandomForestClassifier(n_estimators=100, min_samples_split=40)
+
+# Train the classifier.
+clf.fit(features_train, labels_train)
+
+# Make predictions.
+pred = clf.predict(features_test)
+
+# Compute accuracy of the predictions.
+accuracy = accuracy_score(pred, labels_test)
+
+print 'Random Forest Accuracy: ', accuracy
+
+################################################################################
 
 
 
