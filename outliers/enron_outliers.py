@@ -15,5 +15,26 @@ data = featureFormat(data_dict, features)
 
 ### your code below
 
+for person in data_dict.keys():
+    salary = data_dict[person]["salary"]
+    bonus = data_dict[person]["bonus"]
+
+    if salary == "NaN" or bonus == "NaN":
+        continue
+
+    if bonus > 5000000 and salary > 1000000:
+        print person
+
+for point in data:
+    salary = point[0]
+    bonus = point[1]
+    matplotlib.pyplot.scatter( salary, bonus )
+
+matplotlib.pyplot.xlabel("salary")
+matplotlib.pyplot.ylabel("bonus")
+matplotlib.pyplot.show()
+
+
+
 
 
