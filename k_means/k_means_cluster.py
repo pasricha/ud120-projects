@@ -65,6 +65,46 @@ plt.show()
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
 
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=2).fit(finance_features)
+pred = kmeans.predict(finance_features)
+
+### finding the range of features
+
+max_exercise_stock_options = 0
+min_exercise_stock_options = 100000000
+max_salary = 0
+min_salary = 100000000
+
+for feature in finance_features:
+    if feature[1] != 0:
+        max_exercise_stock_options = max(max_exercise_stock_options, feature[1])
+        min_exercise_stock_options = min(min_exercise_stock_options, feature[1])
+    if feature[0] != 0:
+        max_salary = max(max_salary, feature[0])
+        min_salary = min(min_salary, feature[0])
+
+print 'Max value of "exercised_stock_options": ', max_exercise_stock_options
+print 'Min value of "exercised_stock_options": ', min_exercise_stock_options
+print 'Max value of "salary": ', max_salary
+print 'Min value of "salary": ', min_salary
+
+### apply feature scaling
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+
+scaled_features = scaler.fit_transform(finance_features)
+print 'Scaled salary of $200,000 & stock options of $1,000,000: ', \
+    scaler.transform([[200000., 1000000.]])
+
+### rename the "name" parameter when you change the number of features
+### so that the figure gets saved to a different file
+try:
+    Draw(pred, finance_features, poi, mark_poi=False, name="clusters.pdf", f1_name=feature_1, f2_name=feature_2)
+except NameError:
+    print "no predictions object named pred found, no clusters to plot"
 
 
 
