@@ -40,8 +40,29 @@ test_color = "b"
 
 
 
+# target: bonus
+# input: salary
 
+from sklearn.linear_model import LinearRegression
 
+# Create a linear regression model.
+reg = LinearRegression()
+
+# Fit on the training data.
+reg.fit(feature_train, target_train)
+
+# Extract the slope and the intercept.
+print 'Slope: ', reg.coef_
+print 'intercept: ', reg.intercept_
+
+# Find score of regression on training data.
+print 'Score on training data: ', reg.score(feature_train, target_train)
+
+# Find score of regression on test data.
+print 'Score on test data: ', reg.score(feature_test, target_test)
+
+# Perform the regression of bonus against long term incentive.
+# Change "salary" to "long_term_incentive" on line 24 of this file.
 
 
 
@@ -57,13 +78,17 @@ plt.scatter(feature_test[0], target_test[0], color=test_color, label="test")
 plt.scatter(feature_test[0], target_test[0], color=train_color, label="train")
 
 
-
-
 ### draw the regression line, once it's coded
 try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
+
+# Draw two regression lines, one fit on the test data (with outlier) 
+# and one fit on the training data (no outlier).
+reg.fit(feature_test, target_test)
+plt.plot(feature_train, reg.predict(feature_train), color="b") 
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
