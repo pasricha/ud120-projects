@@ -39,5 +39,25 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 
+print 'Number of training points: ', len(features_train)
 
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+classifier = DecisionTreeClassifier()
+
+classifier.fit(features_train, labels_train)
+
+predictions = classifier.predict(features_test)
+
+accuracy = accuracy_score(predictions, labels_test)
+
+print 'Accuracy: ', accuracy
+
+for i in range(len(classifier.feature_importances_)):
+    if classifier.feature_importances_[i] > 0.2:
+        print "Importance: ", classifier.feature_importances_[i]
+        print "Index: ", i
+        print vectorizer.get_feature_names()[i]
+        print
 
