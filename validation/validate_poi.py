@@ -29,4 +29,27 @@ labels, features = targetFeatureSplit(data)
 
 ### it's all yours from here forward!  
 
+### Split data into training and test set.
+from sklearn.model_selection import train_test_split
+
+features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.3, random_state=42)
+
+
+### Fit a Decision Tree Classifier.
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Create a decision tree classifier.
+classifier = DecisionTreeClassifier()
+
+# Fit the classifier on the training data.
+classifier.fit(features_train, labels_train)
+
+# Make predictions.
+predictions = classifier.predict(features_test, labels_test)
+
+# Compute the accuracy of the predictions.
+accuracy = accuracy_score(predictions, labels_test)
+
+print 'Accuracy on the test set: ', accuracy
 
